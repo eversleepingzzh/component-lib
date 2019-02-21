@@ -58,6 +58,7 @@ class AutoComplete extends Component {
         console.log(this.input.value, 'input')
         this.input.value = value
     }
+
     renderMenu() {
         const { dataSource } = this.props
 
@@ -77,7 +78,6 @@ class AutoComplete extends Component {
             </div>
         )
     }
-
 
 
     render() {
