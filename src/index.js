@@ -2,51 +2,86 @@
 import React, {Component} from 'react';
 import './style.css';
 
+function noop() {}
 
-class MyComponent extends Component {
+class AutoComplete extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            value: '',
-            isShowMenu: false,
+
         }
+    }
+
+    static defaultProps = {
+        dataSource: [],
+        style: {},
+        onSelect: noop,
+        onSearch: noop,
+        placeholder: "placeholder"
+    }
+
+    componentDidMount() {
+
+    }
+
+    componentWillMount() {
+
+    }
+
+    saveInput(node) {
+        this.input = node
     }
 
     handleChange(e) {
-        this.setState({
-            value: e.target.value
-        })
-    }
-
-    handleBlur(e) {
-        console.log('blur');
-        this.setState({
-            isShowMenu: false
-        })
+        const {onChange} = this.props
+        let value = e.target.value
+        if(onChange){ onChange(value)}
+        this.handleSearch(value)
     }
 
     handleFocus(e) {
-        console.log('fous');
-        if(this.state.value) {
-            this.setState({
-                isShowMenu: true
-            })
-        }
+        const {onFocus} = this.props
+        if(onFocus){ onFocus('focus') }
     }
 
+    handleBlur(e) {
+        const {onBlur} = this.props
+        if(onBlur){ onBlur('blur') }
+    }
 
+    handleSearch(value) {
+        const {onSearch} = this.props
+        if(onSearch){ onSearch(value)}
+    }
+
+    setInputValue = (value) => {
+        console.log(this.input.value, 'input')
+        this.input.value = value
+    }
     renderMenu() {
+        const { dataSource } = this.props
+
+        var options
+        options = dataSource.map((item,index) => {
+            return(
+                <div key={index} onClick={() => {
+                    console.log(item)
+                    this.setInputValue(item)
+                }}>{item}</div>
+            )
+        })
+
         return (
-            <div>
-                <p>{this.state.value}</p>
-                <p>{this.state.value + this.state.value}</p>
-                <p>{this.state.value + this.state.value + this.state.value}</p>
+            <div className={'menu'}>
+                {options}
             </div>
         )
     }
 
+
+
     render() {
-        const {isShowMenu} = this.state
+        const {props, state} = this
         return(
             <div>
                 <input
@@ -54,13 +89,14 @@ class MyComponent extends Component {
                     onChange={this.handleChange.bind(this)}
                     onBlur={this.handleBlur.bind(this)}
                     onFocus={this.handleFocus.bind(this)}
+                    ref = {this.saveInput.bind(this)}
                 />
                 {
-                    isShowMenu && this.renderMenu()
+                    this.renderMenu()
                 }
             </div>
         )
     }
 }
 
-export default MyComponent;
+export default AutoComplete;

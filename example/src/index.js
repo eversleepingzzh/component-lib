@@ -1,10 +1,50 @@
 import React from 'react';
 import { render} from 'react-dom';
-import MyComponent from '../../src';
+import AutoComplete from '../../src';
 
 
-const App = () => (
- <MyComponent />
-);
+function onSelect(value) {
+  console.log('onSelect', value);
+}
 
-render(<App />, document.getElementById("root"));
+class Complete extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+          dataSource: [],
+        }
+    }
+
+  handleSearch = (value) => {
+    this.setState({
+      dataSource: !value ? [] : [
+        value + '@qq.com',
+        value + '@163.com',
+        value + '@gmail.com',
+      ],
+    });
+  }
+
+  log = (value) => {
+      console.log(value)
+  }
+
+  render() {
+    const { dataSource } = this.state;
+    return (
+      <AutoComplete
+        dataSource={dataSource}
+        style={{ width: 200 }}
+        onSelect={onSelect}
+        onSearch={this.handleSearch}
+        onBlur={this.log}
+        onFocus={this.log}
+        onChange={this.log}
+        placeholder="input here"
+      />
+    );
+  }
+}
+
+render(<Complete />, document.getElementById("root"));
