@@ -1,0 +1,7 @@
+.menu-container {
+    margin-bottom: 0;
+    padding-left: 0;
+    overflow: auto;
+    list-style: none;
+    outline: none;
+}

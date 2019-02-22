@@ -33,16 +33,18 @@ class Complete extends React.Component {
   render() {
     const { dataSource } = this.state;
     return (
-      <AutoComplete
-        dataSource={dataSource}
-        style={{ width: 200 }}
-        onSelect={onSelect}
-        onSearch={this.handleSearch}
-        onBlur={this.log}
-        onFocus={this.log}
-        onChange={this.log}
-        placeholder="input here"
-      />
+       <div style={{position:'absolute', top:'200px', left: '200px'}}>
+        <AutoComplete
+            dataSource={dataSource}
+            style={{ width: 200 }}
+            onSelect={onSelect}
+            onSearch={this.handleSearch}
+            onBlur={this.log}
+            onFocus={this.log}
+            onChange={this.log}
+            placeholder="input here"
+            />
+        </div>
     );
   }
 }

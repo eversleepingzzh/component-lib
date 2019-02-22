@@ -1,6 +1,8 @@
 
 import React, {Component} from 'react';
-import './style.css';
+import {createPortal, findDOMNode} from 'react-dom';
+import DropDown from './Dropdown.js';
+import MenuItem from './MenuItem.js'
 
 function noop() {}
 
@@ -55,9 +57,13 @@ class AutoComplete extends Component {
     }
 
     setInputValue = (value) => {
-        console.log(this.input.value, 'input')
         this.input.value = value
     }
+
+    getElementRef = () => {
+        return findDOMNode(this)
+    }
+
 
     renderMenu() {
         const { dataSource } = this.props
@@ -65,23 +71,26 @@ class AutoComplete extends Component {
         var options
         options = dataSource.map((item,index) => {
             return(
-                <div key={index} onClick={() => {
-                    console.log(item)
+                <MenuItem key={index} onClick={() => {
+                    // console.log(item)
                     this.setInputValue(item)
-                }}>{item}</div>
+                }}>{item}</MenuItem>
             )
         })
 
         return (
-            <div className={'menu'}>
+            <DropDown
+                targetDom={this.getElementRef}
+            >
                 {options}
-            </div>
+            </DropDown>
         )
     }
 
 
     render() {
         const {props, state} = this
+
         return(
             <div>
                 <input
