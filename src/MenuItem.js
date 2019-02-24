@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './style/menuItem.css'
+import './style/index.css'
 
 
 class MenuItem extends Component{
@@ -8,8 +8,11 @@ class MenuItem extends Component{
     }
 
     render() {
+        const {click} = this.props
         return (
-            <li className='menu-item'>
+            <li className='menu-item'
+                onClick={click}
+            >
                 {this.props.children}
             </li>
         )

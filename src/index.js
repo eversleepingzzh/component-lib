@@ -71,10 +71,11 @@ class AutoComplete extends Component {
         var options
         options = dataSource.map((item,index) => {
             return(
-                <MenuItem key={index} onClick={() => {
-                    // console.log(item)
-                    this.setInputValue(item)
-                }}>{item}</MenuItem>
+                <MenuItem key={index}
+                          click={() => {
+                            this.setInputValue(item)
+                          }}
+                >{item}</MenuItem>
             )
         })
 
@@ -94,6 +95,7 @@ class AutoComplete extends Component {
         return(
             <div>
                 <input
+                    className={'auto-complete-input'}
                     value={this.state.value}
                     onChange={this.handleChange.bind(this)}
                     onBlur={this.handleBlur.bind(this)}

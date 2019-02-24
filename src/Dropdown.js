@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {createPortal, findDOMNode} from 'react-dom';
 import domAlign from 'dom-align';
-
+import './style/index.css'
 
 function noop() {}
 
@@ -12,8 +12,8 @@ class DropDown extends Component {
         const doc = window.document;
         this.node = doc.createElement('div');
         this.node.style.position = 'absolute'
-        this.node.style.top = '0',
-        this.node.style.left = '0',
+        this.node.style.top = '0'
+        this.node.style.left = '0'
         this.node.style.width = '100%';
         doc.body.appendChild(this.node);
     }
@@ -21,7 +21,6 @@ class DropDown extends Component {
     static defaultProps = {
         options:[],
         onSelect: noop,
-
     }
 
     getRootDom = () => {
