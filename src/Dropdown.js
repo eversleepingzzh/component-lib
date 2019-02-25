@@ -43,7 +43,11 @@ class DropDown extends Component {
 
     render() {
         return createPortal(
-            <div className='dropdown-menu'>
+            <div
+                className='dropdown-menu'
+                style={{width: '200px'}}
+                onMouseDown={this.props.clickOnDropDown}
+            >
                 {this.props.children}
             </div>,
             this.node
