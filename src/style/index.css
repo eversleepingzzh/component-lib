@@ -1,7 +1,6 @@
 .dropdown-menu {
     position: relative;
     display: block;
-    padding: 5px 12px;
     overflow: hidden;
     color: rgba(0,0,0,0.65);
     font-weight: normal;
@@ -31,6 +30,9 @@
     transition: background .3s ease;
 }
 
+.menu-item-active {
+    background-color: #e6f7ff;
+}
 .auto-complete-input {
     height: 32px;
     line-height: 1.5;

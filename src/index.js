@@ -103,12 +103,14 @@ class AutoComplete extends Component {
     }
 
     clickOnDropDown = () => {
+        console.log('mousedown');
         this.onPopupMouseDown = true
         clearTimeout(this.mouseDownTimeout);
         this.mouseDownTimeout = setTimeout(() => {
             this.onPopupMouseDown = false
-        },0)
+        },500)
     }
+
 
     renderMenu() {
         const { dataSource } = this.props

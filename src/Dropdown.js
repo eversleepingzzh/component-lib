@@ -16,6 +16,10 @@ class DropDown extends Component {
         this.node.style.left = '0'
         this.node.style.width = '100%';
         doc.body.appendChild(this.node);
+
+        this.state = {
+            width: 0
+        }
     }
 
     static defaultProps = {
@@ -23,9 +27,24 @@ class DropDown extends Component {
         onSelect: noop,
     }
 
+    componentDidMount() {
+        this.alignItem()//对齐
+        let width = this.getInputWidth()
+        this.setState({
+            width
+        })
+    }
+
+    getInputWidth = () => {
+        const {targetDom} = this.props
+        let dom = targetDom()
+        return dom.offsetWidth + 'px'
+    }
+
     getRootDom = () => {
         return findDOMNode(this)
     }
+
 
     alignItem = () => {
         const {targetDom} = this.props
@@ -37,15 +56,13 @@ class DropDown extends Component {
         if(target && source) {domAlign(source,target,alignConfig)}
     }
 
-    componentDidMount() {
-        this.alignItem()
-    }
 
     render() {
+        let {width} = this.state
         return createPortal(
             <div
                 className='dropdown-menu'
-                style={{width: '200px'}}
+                style={{width: width}}
                 onMouseDown={this.props.clickOnDropDown}
             >
                 {this.props.children}
